@@ -1,7 +1,9 @@
 2025-12-02  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* baseboards/h8300.exp: Restore from Git history per a request
-	from Jan Dubiec.
+	from Jan Dubiec.  Apply updates "missed" while the file did not
+	exist: collect copyright years, tidy regsub(n) usage, and remove
+	unconditional use of [find_gcc].
 
 	* baseboards/h8300-sim.exp: Likewise.
 
