@@ -16,7 +16,7 @@
 # along with DejaGnu.  If not, see <http://www.gnu.org/licenses/>.
 
 # This is a list of toolchains that are supported on this board.
-set_board_info target_install  {h8300-hms}
+set_board_info target_install  {h8300-elf}
 
 # Load the tool-specific configuration for this board, as well as the
 # generic configuration. This will define any routines needed by the
@@ -26,7 +26,7 @@ load_generic_config "sim"
 # basic-sim.exp is a basic description for the standard Cygnus simulator.
 load_base_board_description "basic-sim"
 
-# The name of the simulator is "h8300" (as in h8300-hms-run).
+# The name of the simulator is "h8300" (as in h8300-elf-run).
 setup_sim h8300
 
 # No multilib options are used by default.
@@ -49,9 +49,6 @@ set_board_info gdb,noresults 1
 # Limit the stack size to something real tiny.
 set_board_info gcc,stack_size 4096
 set_board_info gcc,text_size 60000
-
-# There's no long long support on this target
-set_board_info no_long_long  1
 
 # sizeof int != sizeof long.
 set_board_info gdb,short_int 1

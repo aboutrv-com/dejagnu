@@ -18,7 +18,7 @@
 # Load the tool-specific configuration for this board, as well as the
 # generic configuration. This will define any routines needed by the
 # tool to communicate with the board.
-load_generic_config "h8300"
+load_generic_config "gdb-comm"
 
 # Don't use anything by default.
 process_multilib_options ""
@@ -48,15 +48,15 @@ set_board_info gcc,stack_size 4096
 # The board can get wedged in amusing and interesting ways.
 set_board_info unreliable 1
 
-# There's no long long support on this target
-set_board_info no_long_long  1
-
 # sizeof int != sizeof long.
 set_board_info gdb,short_int 1
 
-# Pick the right linker script if -mh/-ms is specified.
+# Select the right linker script if -mh/-ms is specified. If neither
+# option is provided, use the script for the H8/300H in advanced mode.
+# By default, GCC generates code for this architecture, as support for
+# the original H8/300 was removed in May 2020.
 
-set linker_script "h8300.ld"
+set linker_script "h8300helf.x"
 
 foreach x $board_variant_list {
     regsub {^[ \t]*} $x "" x
@@ -64,10 +64,10 @@ foreach x $board_variant_list {
 
     switch -- $x {
 	"h" -
-	"-mh" { set linker_script "h8300h.ld" }
+	"-mh" { set linker_script "h8300helf.x" }
 
 	"s" -
-	"-ms" { set linker_script "h8300s.ld" }
+	"-ms" { set linker_script "h8300self.x" }
     }
 }
 
@@ -76,6 +76,6 @@ foreach x $board_variant_list {
 # This one's dependent on the multilib options in use, sadly. And we
 # *need* a linker script. Really. Otherwise the code gets linked at
 # the wrong address and it won't run on the board.
-set_board_info ldscript "-T${prefix_dir}/h8300-hms/${linker_script}"
+set_board_info ldscript "-T${prefix_dir}/h8300-elf/lib/ldscripts/${linker_script}"
 
 unset linker_script
