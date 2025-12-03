@@ -1,3 +1,10 @@
+2025-12-02  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* baseboards/h8300.exp: Restore from Git history per a request
+	from Jan Dubiec.
+
+	* baseboards/h8300-sim.exp: Likewise.
+
 2025-10-10  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* testglue.c: Revise preprocessor conditional annotations to more
