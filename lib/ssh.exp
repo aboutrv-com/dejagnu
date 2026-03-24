@@ -159,7 +159,7 @@ proc ssh_exec { boardname program pargs inp outp } {
 	append ssh_useropts " -p [board_info $boardname port]"
     }
 
-    append ssh_useropts " -o ControlPersist=yes -o ControlMaster=auto -o ControlPath=\"/tmp/ssh-%r@%h:%p\""
+    append ssh_useropts " -t -t -o ControlPersist=yes -o ControlMaster=auto -o ControlPath=\"/tmp/ssh-%r@%h:%p\""
 
     # If CMD sends any output to stderr, exec will think it failed.
     # More often than not that will be true, but it doesn't catch the
