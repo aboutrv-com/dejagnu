@@ -30,29 +30,29 @@ set timeout 10
 proc find_python3 {} {
     global timeout
     foreach candidate {python3 python} {
-        set path [which $candidate]
-        if {$path != 0 } {
-            set status [local_exec "$path -V" "" "" $timeout]
-            set exit_code [lindex $status 0]
-            set output [lindex $status 1]
+	set path [which $candidate]
+	if {$path != 0 } {
+	    set status [local_exec "$path -V" "" "" $timeout]
+	    set exit_code [lindex $status 0]
+	    set output [lindex $status 1]
 
-            if { $exit_code == 0 } {
-                set version [lindex [split [string trim $output] " "] 1 ]
-                if { [package vcompare $version 3.9.0] >= 0 } {
-                    verbose -log "Using Python interpreter at $path" 1
-                    return $path
-                } else {
-                    verbose -log "Python 3.9 or newer is required; found $version for $path" 2
-                    continue
-                }
-            } else {
-                verbose -log "Failed to retrieve the Python version from $path (exit code: $exit_code)" 2
-                continue
-            }
+	    if { $exit_code == 0 } {
+		set version [lindex [split [string trim $output] " "] 1 ]
+		if { [package vcompare $version 3.9.0] >= 0 } {
+		    verbose -log "Using Python interpreter at $path" 1
+		    return $path
+		} else {
+		    verbose -log "Python 3.9 or newer is required; found $version for $path" 2
+		    continue
+		}
+	    } else {
+		verbose -log "Failed to retrieve the Python version from $path (exit code: $exit_code)" 2
+		continue
+	    }
 
-        } else {
-            verbose -log "\'$candidate\' not found in \$PATH" 2
-        }
+	} else {
+	    verbose -log "\'$candidate\' not found in \$PATH" 2
+	}
     }
     perror "No Python interpreter with version 3.9 or higher was found in \$PATH"
     exit 1
@@ -61,7 +61,7 @@ proc find_python3 {} {
 
 set PYTHON3 [find_python3]
 
-# Validate required environment variables upfront to fail fast rather 
+# Validate required environment variables upfront to fail fast rather
 # than letting individual test cases fail
 if {![info exists env(VMTEST_DIR)]} {
     perror "VMTEST_DIR needs to be set for bpf-vmtest-tool"
@@ -95,35 +95,35 @@ proc bpf-vmtest_compile {source destfile type options} {
 
     set opts ""
     foreach i $options {
-        if {[regexp "^compiler=" $i]} {
-            regsub "^compiler=" $i "" tmp
-            if { $tmp eq "" } {
-                return "bpf-vmtest_compile: No compiler to compile with"
-            }
-            set compiler [ lindex [split $tmp " "] 0 ]
-            set compiler_flags [ lindex [split $tmp " "] 1 ]
-            append opts " $compiler_flags"
-        }
+	if {[regexp "^compiler=" $i]} {
+	    regsub "^compiler=" $i "" tmp
+	    if { $tmp eq "" } {
+		return "bpf-vmtest_compile: No compiler to compile with"
+	    }
+	    set compiler [ lindex [split $tmp " "] 0 ]
+	    set compiler_flags [ lindex [split $tmp " "] 1 ]
+	    append opts " $compiler_flags"
+	}
 
-        if {[regexp "^additional_flags=" $i]} {
-            regsub "^additional_flags=" $i "" tmp
-            set tmp [string trim $tmp]
-            append opts " $tmp"
-        }
+	if {[regexp "^additional_flags=" $i]} {
+	    regsub "^additional_flags=" $i "" tmp
+	    set tmp [string trim $tmp]
+	    append opts " $tmp"
+	}
     }
 
     if { $type eq "preprocess" } {
 	    append opts " -E"
     } elseif { $type eq "assembly" } {
-        append opts " -S"
+	append opts " -S"
     } elseif { $type eq "object" } {
-        append opts " -c"
+	append opts " -c"
     } elseif { $type eq "executable" } {
-        # For the executable case, we generate a BPF object. The final
-        # userland executable (which includes the loader) that is executed
-        # inside qemu VM is created in the bpf-vmtest_load proc
-        # by the bpf-vmtest-tool using the kernel-specific libbpf and bpftool.
-        append opts " -c"
+	# For the executable case, we generate a BPF object. The final
+	# userland executable (which includes the loader) that is executed
+	# inside qemu VM is created in the bpf-vmtest_load proc
+	# by the bpf-vmtest-tool using the kernel-specific libbpf and bpftool.
+	append opts " -c"
     }
     #clean up spaces
     set opts [string trim $opts]
@@ -136,12 +136,12 @@ proc bpf-vmtest_compile {source destfile type options} {
     verbose -log "Executed 'env $args', exit_code $exit_code" 1
 
     if { $exit_code > 0 } {
-        verbose -log "Couldn't compile $source" 1
-        return $output
+	verbose -log "Couldn't compile $source" 1
+	return $output
     }
 
     if {$output ne ""} {
-        verbose -log -- $output 2
+	verbose -log -- $output 2
     }
 
     return $output
@@ -162,18 +162,17 @@ proc bpf-vmtest_load {dest prog args} {
 
     verbose -log "Executed '$PYTHON3 $args', exit_code $exit_code" 1
     if { $exit_code > 0 } {
-        verbose -log "Couldn't execute $prog" 1
-        return "unresolved"
+	verbose -log "Couldn't execute $prog" 1
+	return "unresolved"
     }
 
     if {$output ne ""} {
-        verbose -log -- $output 2
+	verbose -log -- $output 2
     }
 
     if { $exit_code == 0 } {
-        return [list "pass" $output]
+	return [list "pass" $output]
     } else {
-        return [list "fail" $output]
+	return [list "fail" $output]
     }
 }
-
