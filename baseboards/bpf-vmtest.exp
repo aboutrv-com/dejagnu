@@ -31,22 +31,25 @@ proc find_python3 {} {
     global timeout
     foreach candidate {python3 python} {
 	set path [which $candidate]
-	if {$path != 0 } {
+	if { $path ne 0 } {
 	    set status [local_exec "$path -V" "" "" $timeout]
 	    set exit_code [lindex $status 0]
 	    set output [lindex $status 1]
 
 	    if { $exit_code == 0 } {
 		set version [lindex [split [string trim $output] " "] 1 ]
+		verbose -log "Found Python $version at $path" 2
 		if { [package vcompare $version 3.9.0] >= 0 } {
 		    verbose -log "Using Python interpreter at $path" 1
 		    return $path
 		} else {
-		    verbose -log "Python 3.9 or newer is required; found $version for $path" 2
+		    verbose -log \
+			"Python 3.9 or newer is required; still looking..." 2
 		    continue
 		}
 	    } else {
-		verbose -log "Failed to retrieve the Python version from $path (exit code: $exit_code)" 2
+		verbose -log \
+		    "Python $path rejected -V with exit code $exit_code" 2
 		continue
 	    }
 
@@ -54,7 +57,7 @@ proc find_python3 {} {
 	    verbose -log "\'$candidate\' not found in \$PATH" 2
 	}
     }
-    perror "No Python interpreter with version 3.9 or higher was found in \$PATH"
+    perror "Python 3.9 or higher was not found in \$PATH"
     exit 1
 
 }

@@ -2,8 +2,10 @@
 
 	* baseboards/bpf-vmtest.exp: Allow user to override search for
 	Python 3 interpreter.
-	(bpf-vmtest_compile, bpf-vmtest_load): Use Tcl line
+	(find_python3, bpf-vmtest_compile, bpf-vmtest_load): Use Tcl line
 	continuation to wrap long lines.
+	(find_python3): Revise messages and change test for failure of
+	"which" to string comparison.
 
 2026-03-24  Jacob Bachmeyer  <jcb@gnu.org>
 
