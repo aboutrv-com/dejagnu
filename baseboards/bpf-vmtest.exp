@@ -59,7 +59,12 @@ proc find_python3 {} {
 
 }
 
-set PYTHON3 [find_python3]
+if {![info exists PYTHON3]} {
+    set PYTHON3 [find_python3]
+    verbose -log "Found Python3 interpreter: $PYTHON3" 1
+} else {
+    verbose -log "Using Python3 interpreter: $PYTHON3" 1
+}
 
 # Validate required environment variables upfront to fail fast rather
 # than letting individual test cases fail
