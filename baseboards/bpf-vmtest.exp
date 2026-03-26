@@ -72,6 +72,7 @@ if {![info exists env(VMTEST_DIR)]} {
     perror "VMTEST_DIR needs to be set for bpf-vmtest-tool"
     exit 1
 }
+
 # Process variables passed from arguments and apply defaults
 if {![info exists KERNEL_VERSION]} {
     set KERNEL_VERSION 6.15
@@ -133,7 +134,9 @@ proc bpf-vmtest_compile {source destfile type options} {
     #clean up spaces
     set opts [string trim $opts]
     # compile through the tool to use the kernel-specific vmlinux.h
-    set args [list "BPF_CFLAGS=$opts" "BPF_CC=$compiler" $PYTHON3 $BPF_VMTEST_PY --log-level $LOG_LEVEL bpf compile $source -k $KERNEL_VERSION -o $destfile ]
+    set args [list "BPF_CFLAGS=$opts" "BPF_CC=$compiler" \
+		  $PYTHON3 $BPF_VMTEST_PY --log-level $LOG_LEVEL \
+		  bpf compile $source -k $KERNEL_VERSION -o $destfile ]
     set status [local_exec "env $args" "" "" $timeout]
     set exit_code [lindex $status 0]
     set output [lindex $status 1]
@@ -160,7 +163,8 @@ proc bpf-vmtest_load {dest prog args} {
     global BPF_VMTEST_PY
     global timeout
 
-    set args [list $BPF_VMTEST_PY --log-level $LOG_LEVEL vmtest -k $KERNEL_VERSION --bpf-obj $prog ]
+    set args [list $BPF_VMTEST_PY --log-level $LOG_LEVEL \
+		  vmtest -k $KERNEL_VERSION --bpf-obj $prog ]
     set status [local_exec "$PYTHON3 $args" "" "" $timeout]
     set exit_code [lindex $status 0]
     set output [lindex $status 1]

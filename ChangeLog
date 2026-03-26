@@ -2,6 +2,8 @@
 
 	* baseboards/bpf-vmtest.exp: Allow user to override search for
 	Python 3 interpreter.
+	(bpf-vmtest_compile, bpf-vmtest_load): Use Tcl line
+	continuation to wrap long lines.
 
 2026-03-24  Jacob Bachmeyer  <jcb@gnu.org>
 
