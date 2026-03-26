@@ -1,3 +1,7 @@
+2026-03-25  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* baseboards/qemu.exp: Convert obsolete Tcl case(n) to switch(n).
+
 2025-12-02  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* baseboards/h8300.exp: Restore from Git history per a request
