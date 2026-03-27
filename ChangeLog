@@ -1,4 +1,15 @@
+2026-03-26  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR80674
+
+	Thanks to Jakub Jelinek <jakub@redhat.com> for reporting this issue.
+
+	* lib/utils.exp (diff): Use "-translation" option instead of
+	"-encoding" option to fconfigure(n) for compatibility with Tcl 9.
+
 2026-03-25  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR80674
 
 	* baseboards/qemu.exp: Convert obsolete Tcl case(n) to switch(n).
 
