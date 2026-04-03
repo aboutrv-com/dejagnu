@@ -1,6 +1,6 @@
 #! /bin/sh
 #
-# Copyright (C) 1992-2016, 2021, 2024 Free Software Foundation, Inc.
+# Copyright (C) 1992-2016, 2021, 2024, 2026 Free Software Foundation, Inc.
 #
 # This file is part of DejaGnu.
 #
@@ -39,6 +39,10 @@ if test -n "${ZSH_VERSION+set}" && (emulate sh) > /dev/null 2>&1 ; then
     alias -g '${1+"$@"}'='"$@"'
     setopt NO_GLOB_SUBST
 fi
+
+# Ensure that DejaGnu will be run in the POSIX locale
+LC_ALL=C
+export LC_ALL
 
 # Get the execution path to this script and the current directory.
 

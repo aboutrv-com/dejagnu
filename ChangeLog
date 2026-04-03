@@ -1,3 +1,10 @@
+2026-04-02  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR80674
+
+	* runtest (LC_ALL): Set this to "C" and export to ensure that
+	DejaGnu testsuites run in the standard POSIX locale.
+
 2026-03-26  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR80674
