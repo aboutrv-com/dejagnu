@@ -1,5 +1,11 @@
 -*- text -*-
 
+Changes since 1.6.3:
+
+ X. DejaGnu now always runs in the POSIX locale.  Additionally, environment
+    variables such as CDPATH that are widely-known and intended for user
+    customization are unset during early initialization.
+
 Changes since 1.6.2:
 
  1. The internal proc 'is_remote' has been renamed to 'isremote' for

@@ -1,5 +1,5 @@
 # runtest.exp -- Test framework driver
-# Copyright (C) 1992-2019, 2020, 2022, 2023, 2024
+# Copyright (C) 1992-2019, 2020, 2022, 2023, 2024, 2026
 #               Free Software Foundation, Inc.
 #
 # This file is part of DejaGnu.
@@ -109,6 +109,33 @@ namespace eval ::dejagnu::error {
 # different current directory, breaking GDB testsuite.
 set env(CCACHE_DISABLE) 1
 unset -nocomplain env(CCACHE_NODISABLE)
+
+#
+# Unset user-specific environment variables
+#
+#  The first group are listed in the GNU Autoconf manual; the rest are from
+#  a list given by POSIX.
+foreach enpat {
+    CDPATH CLICOLOR_FORCE ENV MAIL MAILPATH PS1 PS2 PS4
+    FPATH GREP_OPTIONS IFS
+
+    EDITOR FCEDIT LISTER MORE PAGER VISUAL
+
+    CHARSET EXINIT PROCLANG HISTFILE HISTORY HISTSIZE LPDEST PRINTER
+
+    MAILCHECK MBOX MSGVERB OPTARG OPTERR OPTIND PS3
+} { array unset env $enpat }
+# ... and select POSIX locale
+#
+#  The first group are the variables defined by POSIX; the second group are
+#  GNU extensions.
+foreach locvar {
+    LANG LC_ALL LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC
+    LC_TIME
+
+    LANGUAGE LC_ADDRESS LC_IDENTIFICATION LC_MEASUREMENT LC_NAME LC_PAPER
+    LC_TELEPHONE
+} { set env($locvar) C }
 
 #
 # some convenience abbreviations

@@ -1,3 +1,12 @@
+2026-04-20  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* NEWS: Add item for using POSIX locale and unsetting user
+	customization environment variables.
+
+	* runtest.exp: Add logic for erasing environment variables that
+	are used for user customization and therefore should not be
+	inherited into testsuites.
+
 2026-04-02  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR80674
