@@ -1,3 +1,13 @@
+2026-05-20  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR81083
+
+	* runtest.exp: Replace use of tilde expansion when loading
+	.dejagnurc with direct use of $env(HOME) and [file join] for
+	compatibility with Tcl 9.  The direct substitution of HOME is the
+	documented behavior of GNU bash in this situation.
+	(load_file): Add detail about Tcl 9 behavior change to comment.
+
 2026-04-20  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* NEWS: Add item for using POSIX locale and unsetting user

@@ -339,8 +339,9 @@ proc load_file { args } {
     set found 0
     foreach file [lrange $args $i end] {
 	verbose "Looking for $file" 2
-	# In Tcl, "file exists" fails if the filename looks like
+	# In Tcl 8, "file exists" fails if the filename looks like
 	# ~/FILE and the environment variable HOME does not exist.
+	# In Tcl 9, this tilde expansion no longer exists.
 	if {! [catch {file exists $file} result] && $result} {
 	    set found 1
 	    verbose "Found $file"
@@ -1070,7 +1071,7 @@ if {[info exists env(DEJAGNU)]} {
 }
 
 # Load user .dejagnurc file last as the ultimate override.
-load_file ~/.dejagnurc
+load_file [file join $env(HOME) .dejagnurc]
 
 if {![info exists boards_dir]} {
     set boards_dir ""
