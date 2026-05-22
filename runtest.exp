@@ -1071,7 +1071,9 @@ if {[info exists env(DEJAGNU)]} {
 }
 
 # Load user .dejagnurc file last as the ultimate override.
-load_file [file join $env(HOME) .dejagnurc]
+if { [info exists env(HOME)] } {
+    load_file [file join $env(HOME) .dejagnurc]
+}
 
 if {![info exists boards_dir]} {
     set boards_dir ""

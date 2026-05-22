@@ -1,3 +1,11 @@
+2026-05-21  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR81083
+
+	* runtest.exp: Add test to verify that HOME is set in the
+	environment before attempting to use it to locate .dejagnurc.
+	Previously, this was covered by a catch(n) in load_file.
+
 2026-05-20  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR81083
