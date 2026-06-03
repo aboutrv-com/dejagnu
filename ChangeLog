@@ -1,3 +1,14 @@
+2026-06-02  Jacob Bachmeyer  <jcb@gnu.org>
+
+	Apply patches by Joseph Myers <josmyers@redhat.com>
+
+	* lib/ssh.exp (ssh_exec): Fix use of && in remote shell to report
+	exit status of program.  Previously, the status was only reported
+	if it was zero; it is now reported unconditionally.
+	(ssh_exec): Add options to force pty allocation on the remote.
+	This better aligns the behavior of remote and local execs, as
+	Expect will typically use a pty for the child process locally.
+
 2026-05-21  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR81083
