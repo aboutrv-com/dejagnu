@@ -168,7 +168,7 @@ proc ssh_exec { boardname program pargs inp outp } {
 	set inp "/dev/null"
     }
 
-    set ret [local_exec "$SSH $ssh_useropts $ssh_user$hostname sh -c '$program $pargs 2>&1 ; echo XYZ\\\${?}ZYX \\; rm -f $program'" $inp $outp $timeout]
+    set ret [local_exec "$SSH $ssh_useropts $ssh_user$hostname sh -c '$program $pargs 2>&1 ; echo XYZ\\\${?}ZYX'" $inp $outp $timeout]
     set status [lindex $ret 0]
     set output [lindex $ret 1]
 
