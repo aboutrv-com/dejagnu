@@ -1,4 +1,38 @@
+2026-07-03  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602
+
+	* config/adb.exp (adb_serial): Raise an error if multiple devices
+	are present and ADB_SERIAL is not set in the environment.
+	(adb_open, adb_download, adb_file, adb_upload, adb_exec): Use
+	eval(n) and list(n) to interpolate [adb_serial] when spawning
+	child processes and protect other variable interpolations.
+
+	* lib/dejagnu.exp (host_compile): Add explicit eval(n) to properly
+	interpolate argument list.
+	* lib/rsh.exp (rsh_download): Likewise.
+
+	* lib/ssh.exp (ssh_close): Remove unused local variables.
+	Refactor to use list operations instead of string interpolation.
+
+	* testsuite/lib/util-defs.exp (util_start): Add eval(n) to
+	properly interpolate argument lists when spawning child process.
+
 2026-07-02  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602
+
+	* runtest.exp: Change script argument to Tcl catch(n) to use
+	braces instead of double quotes throughout.
+	* config/aarch64-fv8.exp, config/adb.exp: Likewise.
+	* lib/debugger.exp, lib/dejagnu.exp, lib/dg.exp: Likewise.
+	* lib/framework.exp, lib/remote.exp, lib/rlogin.exp: Likewise.
+	* lib/rsh.exp, lib/ssh.exp, lib/target.exp, lib/telnet.exp:
+	Likewise.
+	* testsuite/lib/libsup.exp, testsuite/lib/util-defs.exp: Likewise.
+
+	* lib/remote.exp (local_exec): Remove unnecessary eval(n) after
+	changing quotes on catch(n) to braces.
 
 	* baseboards/riscv-sim.exp, config/adb.exp: Update license notice
 	to GPLv3 after past oversights.
