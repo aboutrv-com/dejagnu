@@ -1,3 +1,8 @@
+2026-07-02  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* baseboards/riscv-sim.exp, config/adb.exp: Update license notice
+	to GPLv3 after past oversights.
+
 2026-06-17  Jacob Bachmeyer  <jcb@gnu.org>
 
 	Apply patches by Joseph Myers <josmyers@redhat.com>
