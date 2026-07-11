@@ -1,5 +1,8 @@
 2026-07-11  Jacob Bachmeyer  <jcb@gnu.org>
 
+	* commands/report-card.awk: Exit with an error return if there are
+	no files to read instead of attempting to read standard input.
+
 	PR44602
 
 	* runtest.exp (load_file): Use list(n) to quote script arguments
