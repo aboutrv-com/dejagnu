@@ -10,6 +10,23 @@
 	(search_and_load_file): Likewise.
 	(runtest): Likewise.
 
+	* testsuite/lib/runtest.exp (runtest_setup_nested_testsuite):
+	Quote directory names when writing nested-init.exp to ensure that
+	it will be valid Tcl if the absolute names contain whitespace.
+
+	* testsuite/report-card.all/onetest.exp: Quote object directory
+	names in shell invocations to properly handle absolute names
+	containing whitespace.
+	* testsuite/report-card.all/passes.exp
+	(run_multipass_output_test): Likewise.
+
+	* testsuite/runtest.libs/testsuite_file.test: Revise tests to
+	protect interpolations of directory variables.
+
+	* testsuite/runtest.libs/utils.test: Declare test of which
+	procedure with an absolute file name unsupported if the full
+	absolute name of the object directory contains whitespace.
+
 2026-07-03  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR44602
