@@ -1,3 +1,42 @@
+2026-08-20  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* testsuite/runtest.libs/libs.exp (process_test): Add braces to
+	regexp for matching valid test names.
+
+	* testsuite/runtest.libs/utils.test: Add tests to cover all
+	branches in existing which procedure.
+
+2026-08-01  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* testsuite/runtest.libs/libs.exp (process_test): Avoid use of Tcl
+	list operations to split a string, discovered when tests began
+	producing test names that were invalid Tcl list syntax.
+
+	* testsuite/runtest.libs/utils.test: Add tests for splitting
+	arguments given with a command and handling the current support
+	for the edge case of a command containing a space.
+
+2026-07-27  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* testsuite/runtest.libs/mockutil.tcl (test_proc_with_mocks): Add
+	check_result option to match a regexp against the return value of
+	the tested code fragment.
+
+	* testsuite/runtest.libs/mockvfs.tcl (create_mock_file):
+	Initialize file attributes to empty list.
+	(set_mock_file_attributes): New procedure.
+	(mockvfs_op_file): Add exists, join, split, executable, and
+	normalize operations to the implemented subset.
+
+	* testsuite/runtest.libs/utils.test: Load test mock libraries.
+	Add tests for which using mock environments.
+
 2026-07-11  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* commands/report-card.awk: Exit with an error return if there are
