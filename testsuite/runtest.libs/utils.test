@@ -200,7 +200,8 @@ proc test_which { path files tests } {
     foreach test [regsub -all -line "#.*$" $tests ""] {
 	eval [list test_proc_with_mocks \
 		  [format "%s, mockvfs" [string trim [lindex $test 0]]] \
-		  which-test] $test
+		  which-test] [regsub -all "\n" $test " "]
+	# The above regsub allows test items to span lines.
     }
     delete_test_interpreter which-test
 }
@@ -222,13 +223,31 @@ test_which "/bin:/usr/bin:/opt/weird:/opt/quux" \
 	"/opt/weird/foo bar"	{ executable }
 	"/opt/weird/baz"	{ }
 	"/opt/quux/baz"		{ executable }
+	"/opt/weird/we {can get} weirder"
+				{ executable }
     } {
 	{ { which "gcc -mbar" } check_result {/usr/bin/gcc} }
 	{ { which "{foo bar}" } check_result {/opt/weird/foo bar} }
 	{ { which "{foo bar} --baz" } check_result {/opt/weird/foo bar} }
+	{ { which "\"foo bar\"" } check_result {/opt/weird/foo bar} }
+	{ { which "\"foo bar\" --baz" } check_result {/opt/weird/foo bar} }
+	{ { which "foo\\ bar" } check_result {/opt/weird/foo bar} }
+	{ { which "foo\\ bar --baz" } check_result {/opt/weird/foo bar} }
 	{ { which "baz" } check_result {/opt/quux/baz} }
 	{ { which "baz --bar" } check_result {/opt/quux/baz} }
 	{ { which bogus } check_result {0} }
+	{ { which "{we {can get} weirder}" }
+	    check_result {/opt/weird/we {can get} weirder} }
+	{ { which "{we {can get} weirder} --yes-this-name-is-valid" }
+	    check_result {/opt/weird/we {can get} weirder} }
+	{ { which "\"we {can get} weirder\"" }
+	    check_result {/opt/weird/we {can get} weirder} }
+	{ { which "\"we {can get} weirder\" --yes-this-name-is-valid" }
+	    check_result {/opt/weird/we {can get} weirder} }
+	{ { which "we\\ {can\\ get}\\ weirder" }
+	    check_result {/opt/weird/we {can get} weirder} }
+	{ { which "we\\ {can\\ get}\\ weirder --yes-this-name-is-valid" }
+	    check_result {/opt/weird/we {can get} weirder} }
     }
 
 ### Do not adjust the comment on the next line. The grep test case
