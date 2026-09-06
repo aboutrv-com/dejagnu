@@ -1,3 +1,12 @@
+2026-09-05  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* testsuite/runtest.libs/utils.test: Add tests for GCC arguments
+	containing absolute file names.  Add tests for PATH search when a
+	PATH entry contains whitespace.
+	(test_which): Properly handle PATH value containing whitespace.
+
 2026-08-21  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR44602 / PR47385

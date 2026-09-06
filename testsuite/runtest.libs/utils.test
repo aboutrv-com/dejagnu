@@ -190,7 +190,7 @@ proc test_which { path files tests } {
 	link_procs { verbose }
 	shim_procs { warning }
 	attach_vfs { which-test-vfs }
-	vars { env(PATH) $path }
+	vars { env(PATH) [list $path] }
     }]
     foreach {file attributes} $files {
 	create_mock_file		which-test-vfs $file {}
@@ -215,6 +215,10 @@ test_which "/bin:/usr/bin" \
 	{ { which ksh }	check_result {/usr/bin/ksh} }
 	{ { which gcc } check_result {/usr/bin/gcc} }
 	{ { which "gcc -mfoo" } check_result {/usr/bin/gcc} }
+	{ { which "gcc -DFOODIR=\"/usr/share/foo\"" }
+	    check_result {/usr/bin/gcc} }
+	{ { which "gcc -I/usr/special/include" }
+	    check_result {/usr/bin/gcc} }
     }
 
 test_which "/bin:/usr/bin:/opt/weird:/opt/quux" \
@@ -248,6 +252,24 @@ test_which "/bin:/usr/bin:/opt/weird:/opt/quux" \
 	    check_result {/opt/weird/we {can get} weirder} }
 	{ { which "we\\ {can\\ get}\\ weirder --yes-this-name-is-valid" }
 	    check_result {/opt/weird/we {can get} weirder} }
+    }
+
+test_which "/bin:/usr/bin:/opt/even weirder/bin:/opt/quux" \
+    {	"/bin/sh"			{ executable }
+	"/usr/bin/gcc"			{ executable }
+	"/opt/even weirder/bin/weirdcc"	{ executable }
+	"/opt/quux/foo"			{ executable }
+    } {
+	# ensure that a PATH element containing whitespace is searched
+	{ { which "weirdcc" } check_result {/opt/even weirder/bin/weirdcc} }
+	# ensure that an item in a PATH element after a PATH element
+	# containing whitespace is found
+	{ { which "foo" } check_result {/opt/quux/foo} }
+	# ensure that arguments are correctly split
+	{ { which "weirdcc -DFOODIR=\"/usr/share/foo\"" }
+	    check_result {/opt/even weirder/bin/weirdcc} }
+	{ { which "weirdcc -I/usr/special/include" }
+	    check_result {/opt/even weirder/bin/weirdcc} }
     }
 
 ### Do not adjust the comment on the next line. The grep test case
