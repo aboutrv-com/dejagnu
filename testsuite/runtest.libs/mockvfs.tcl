@@ -121,6 +121,22 @@ proc mockvfs_op_file	{ vfsname sicmd op args } {
 		return 1
 	    }
 	}
+	isdirectory {
+	    set name [lindex $args 0]
+	    if { [lsearch $vfs(file,attr,$name) directory] == -1 } {
+		return 0
+	    } else {
+		return 1
+	    }
+	}
+	isfile {
+	    set name [lindex $args 0]
+	    if { [lsearch $vfs(file,attr,$name) directory] == -1 } {
+		return 1
+	    } else {
+		return 0
+	    }
+	}
 	default {
 	    error "mockvfs: file $op not implemented"
 	}

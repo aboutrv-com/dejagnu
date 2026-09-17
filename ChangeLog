@@ -1,3 +1,15 @@
+2026-09-16  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* lib/utils.exp (which): Rewrite.  The new implementation builds a
+	list of possible filenames, either by variably splitting on
+	whitespace or walking the shell command path obtained from the
+	PATH environment variable.
+
+	* testsuite/runtest.libs/mockvfs.tcl (mockvfs_op_file): Add
+	isdirectory and isfile operations to the implemented subset.
+
 2026-09-05  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR44602 / PR47385
@@ -57,6 +69,15 @@
 
 	* testsuite/runtest.libs/utils.test: Load test mock libraries.
 	Add tests for which using mock environments.
+
+2026-07-25  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR44602 / PR47385
+
+	* doc/dejagnu.texi (which procedure): Document behavior when given
+	a relative or absolute file name.  Document stripping command
+	arguments from provided string.  These features were previously
+	present but undocumented.
 
 2026-07-11  Jacob Bachmeyer  <jcb@gnu.org>
 
