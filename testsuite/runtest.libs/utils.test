@@ -135,12 +135,7 @@ if {[which ./config.status] != 0} {
 
 # Test 'which' using an absolute path.
 #
-if {[regexp {[[:space:]]} $objdir]} {
-    # unfortunately, the which procedure explicitly truncates its argument
-    # at the first whitespace and ChangeLog-1992 appears to indicate that
-    # it has done so since 11 Jul 1993.
-    unsupported "which, absolute path to config.status"
-} elseif {[which [file join $objdir .. config.status]] != 0} {
+if {[which [file join $objdir .. config.status]] != 0} {
   pass "which, absolute path to config.status"
 } else {
   fail "which, absolute path to config.status"

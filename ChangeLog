@@ -10,6 +10,10 @@
 	* testsuite/runtest.libs/mockvfs.tcl (mockvfs_op_file): Add
 	isdirectory and isfile operations to the implemented subset.
 
+	* testsuite/runtest.libs/utils.test: Support for testing the which
+	procedure with an absolute file name when the full absolute name
+	of the object directory contains whitespace is restored.
+
 2026-09-05  Jacob Bachmeyer  <jcb@gnu.org>
 
 	PR44602 / PR47385
