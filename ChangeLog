@@ -1,3 +1,8 @@
+2026-10-17  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* doc/dejagnu.texi (remote_load procedure): Document.
+	(standard_load procedure): Document.
+
 2026-07-02  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* baseboards/riscv-sim.exp, config/adb.exp: Update license notice
