@@ -3778,17 +3778,18 @@ The host on which to set a binary connection.
 @subsubheading remote_close Procedure
 @findex remote_close
 
+This procedure closes the connection to a remote host or board.
+
 @quotation
-@t{@b{remote_close} @i{shellid}}
+@t{@b{remote_close} @i{board}}
 @end quotation
 
 @table @asis
 
-@item @code{shellid}
-This is the value returned by a call to @code{remote_open}.  This
-closes the connection to the target so resources can be used by
-others.  This parameter can be left off if the @code{fileid} field in
-the @code{target_info} array is set.
+@item @code{board}
+This is the name of the destination that should be disconnected.  The
+aliases @code{target}, @code{host}, and @code{build} are also
+accepted.
 @end table
 
 @node remote_download procedure, remote_exec procedure, remote_close procedure, Procedures For Remote Communication

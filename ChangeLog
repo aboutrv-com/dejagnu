@@ -6,6 +6,8 @@
 	behavior if wrapped program terminates using abort().
 	(file_on_build procedure): Document.
 	(file_on_host procedure): Document.
+	(remote_close procedure): Revise documentation to describe the
+	behavior of the current code.
 	(remote_file procedure): Document arguments and known operations.
 
 2026-11-06  Jacob Bachmeyer  <jcb@gnu.org>
