@@ -3687,10 +3687,17 @@ version, and finally @code{call_remote} will call
 @subsubheading check_for_board_status Procedure
 @findex check_for_board_status
 
-This procedure inspected the named variable within the calling
+This procedure inspects the named variable within the calling
 procedure for the expected output from the status wrapper.  A
-non-negative value is returned if it exists.  Otherwise, it returns
--1.  The output from the status wrapper is removed from the variable.
+non-negative value is returned if found.  If no status wrapper output
+is found, then 2 is returned if the @code{needs_status_wrapper} field
+is set in the @code{target_info} array, and -1 is returned if that
+field is not set.  The output from the status wrapper is removed from
+the variable.
+
+The status wrapper is @file{testglue.c} packaged with DejaGnu.  The
+status wrapper reports exit code 4242 if the wrapped program
+terminates by calling @code{abort()}.
 
 @quotation
 @t{@b{check_for_board_status} @i{variable}}

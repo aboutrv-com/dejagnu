@@ -1,6 +1,9 @@
 2026-11-17  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* doc/dejagnu.texi (Procedures For Remote Communication): Revise.
+	(check_for_board_status procedure): Revise.  Document behavior if
+	status wrapper message is missing.  Document status wrapper
+	behavior if wrapped program terminates using abort().
 
 2026-11-06  Jacob Bachmeyer  <jcb@gnu.org>
 
