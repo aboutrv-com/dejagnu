@@ -4,6 +4,9 @@
 	(check_for_board_status procedure): Revise.  Document behavior if
 	status wrapper message is missing.  Document status wrapper
 	behavior if wrapped program terminates using abort().
+	(file_on_build procedure): Document.
+	(file_on_host procedure): Document.
+	(remote_file procedure): Document arguments and known operations.
 
 2026-11-06  Jacob Bachmeyer  <jcb@gnu.org>
 

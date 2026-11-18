@@ -3714,29 +3714,21 @@ variable (@code{$var}).
 @subsubheading file_on_build Procedure
 @findex file_on_build
 
-@quotation
-@t{@b{file_on_build} @i{op} @i{file} @i{args}}
-@end quotation
+This is shorthand for @code{remote_file build}.
 
-@table @asis
-@item @code{op}
-@item @code{file}
-@item @code{args}
-@end table
+@quotation
+@t{@b{file_on_build} @i{op} @i{args}}
+@end quotation
 
 @node file_on_host procedure, local_exec procedure, file_on_build procedure, Procedures For Remote Communication
 @subsubheading file_on_host Procedure
 @findex file_on_host
 
-@quotation
-@t{@b{file_on_host} @i{op} @i{file} @i{args}}
-@end quotation
+This is shorthand for @code{remote_file host}.
 
-@table @asis
-@item @code{op}
-@item @code{file}
-@item @code{args}
-@end table
+@quotation
+@t{@b{file_on_host} @i{op} @i{args}}
+@end quotation
 
 @node local_exec procedure, remote_binary procedure, file_on_host procedure, Procedures For Remote Communication
 @subsubheading local_exec Procedure
@@ -3881,15 +3873,42 @@ neutral value.
 @findex remote_file
 
 @quotation
-@t{@b{remote_file} @i{dest} @i{args}}
+@t{@b{remote_file} @i{dest} @i{op} @i{args}}
 @end quotation
 
 @table @asis
 
 @item @code{dest}
-
+Where the operation should be performed.
+@item @code{op}
+Operation to perform.
 @item @code{args}
+Additional arguments determined by @i{op}.  The first argument is
+typically a file name.
 @end table
+
+The defined values for @i{op} and their arguments currently are:
+
+@table @asis
+@item @code{absolute} @i{file}
+Return absolute name of @i{file}.
+@item @code{cmp} @i{file1} @i{file2}
+Compare contents of @i{file1} and @i{file2}.  Return 0 if they are
+identical, 1 otherwise.
+@item @code{delete} @i{file}...
+Delete @i{file}.  Multiple files may be specified.
+@item @code{dirname} @i{file}
+Return name of directory containing @i{file}.
+@item @code{exists} @i{file}
+Test if @i{file} exists.  Return true if so.
+@item @code{join} @i{name}...
+Return filename constructed by combining the arguments using the
+appropriate name component separator.
+@item @code{tail} @i{name}
+Return last filename component in @i{name}.
+@end table
+
+The operations actually supported vary by destination.
 
 @node remote_ld procedure, remote_load procedure, remote_file procedure, Procedures For Remote Communication
 @subsubheading remote_ld Procedure
