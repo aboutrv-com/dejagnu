@@ -3604,13 +3604,14 @@ for convenience in top-level scripts, but the @code{begin} and
 The file @file{lib/remote.exp} defines procedures for establishing and
 managing communications.  Each of these procedures tries to establish
 the connection up to three times before returning.  Warnings (if
-retries will continue) or errors (if the attempt is abandoned) report
-on communication failures.  The result for any of these procedures is
-either @emph{-1}, when the connection cannot be established, or the
-spawn ID returned by the Expect command @code{spawn}.
+retries will continue) or errors (if the attempt is abandoned) are
+reported on communication failures.  The result for any of these
+procedures is either @emph{-1}, when the connection cannot be
+established, or the spawn ID returned by the Expect command
+@code{spawn}.
 
-It use the value of the @code{connect} field in the @code{target_info}
-array as the type of connection to make.  Current supported connection
+The value of the @code{connect} field in the @code{target_info} array
+selects the type of connection to make.  Current supported connection
 types are ssh, tip, kermit, telnet, rsh, and rlogin.  If the
 @code{--reboot} option was used on the @command{runtest} command line,
 then the target is rebooted before the connection is made.

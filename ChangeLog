@@ -1,3 +1,7 @@
+2026-11-17  Jacob Bachmeyer  <jcb@gnu.org>
+
+	* doc/dejagnu.texi (Procedures For Remote Communication): Revise.
+
 2026-11-06  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* testsuite/lib/bohman_ssd.exp
