@@ -164,7 +164,8 @@ proc local_exec { commandline inp outp timeout } {
     global errorInfo
     if { $inp eq "" && $outp eq "" } {
 	set id -1
-	set result [catch {spawn -ignore SIGHUP $commandline} pid]
+	set result [catch {eval [list spawn -ignore SIGHUP] $commandline} \
+			pid]
 	if { $result == 0 } {
 	    set result2 0
 	} else {

@@ -1,3 +1,13 @@
+2026-11-21  Jacob Bachmeyer  <jcb@gnu.org>
+
+	PR82296
+
+	* doc/dejagnu.texi (local_exec procedure): Document the format of
+	the command argument as a Tcl list.
+
+	* lib/remote.exp (local_exec): Insert eval(n) to split the command
+	line before passing it to spawn.
+
 2026-11-17  Jacob Bachmeyer  <jcb@gnu.org>
 
 	* doc/dejagnu.texi (Procedures For Remote Communication): Revise.

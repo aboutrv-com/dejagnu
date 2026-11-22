@@ -3743,10 +3743,14 @@ output is redirected, this may or may not be empty.  If output is
 redirected, both stdout and stderr will appear in the specified file.
 
 @quotation
-@t{@b{local_exec} @i{commandline} @i{inp} @i{outp} @i{timeout}}
+@t{@b{local_exec} @i{command} @i{inp} @i{outp} @i{timeout}}
 @end quotation
 
 @table @asis
+@item @code{command}
+The command to run, as a Tcl list of the program name or file followed
+by any arguments to that program.
+
 @item @code{inp}
 Redirect input into the input filename if not set to @code{""}.
 
@@ -3755,7 +3759,6 @@ Redirect output into the output filename if not set to @code{""}.
 
 @item @code{timeout}
 Timeout in seconds.
-
 @end table
 
 @node remote_binary procedure, remote_close procedure, local_exec procedure, Procedures For Remote Communication
